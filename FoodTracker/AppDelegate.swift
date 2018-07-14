@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        setUpWindowAndRootView()
+        
         return true
     }
 
@@ -43,4 +46,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+extension AppDelegate {
+    
+    func setUpWindowAndRootView() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.backgroundColor = UIColor.white
+        window!.makeKeyAndVisible()
+        
+        let adVC = AdViewController()
+        adVC.completion = {
+            //let vc = MainViewController()
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! UINavigationController
+//            let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MealTableViewController") as! MealTableViewController
+//            vc1.adView = adVC.view
+            self.window!.rootViewController = vc
+        }
+        window!.rootViewController = adVC
+    }
+}
+
+
 
